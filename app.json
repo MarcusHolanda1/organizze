@@ -1,0 +1,12 @@
+{
+  "name": "organizze",
+  "displayName": "organizze",
+  "expo": {
+    "name": "organizze",
+    "slug": "organizze",
+    "version": "1.0.0",
+    "assetBundlePatterns": [
+      "**/*"
+    ]
+  }
+}
