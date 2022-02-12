@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import StartSlidePage from "./design/structures/startSlide";
+import StartSlidePage from "./design/structures/StartSlide";
 import AppIntroSlider from "react-native-app-intro-slider";
 import { Text, Image, StyleSheet, View } from "react-native";
 import { RFValue } from "react-native-responsive-fontsize";
