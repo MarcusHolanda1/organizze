@@ -1,0 +1,13 @@
+export const Theme = {
+  colors: {
+    error: "#FF6363",
+    background: "#FFF",
+    primary: "#8263FF",
+    primaryMedium: "#633DFF",
+    primaryBold: "#3B0069",
+    secondary: "#F26EBD",
+    secondaryLight: "#FDD6ED",
+    noti: "#60E9C0",
+    notiLight: "#C0FAE9",
+  },
+};
