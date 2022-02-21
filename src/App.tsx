@@ -1,46 +1,36 @@
 import React, { useState } from "react";
-import StartSlidePage from "./design/structures/StartSlide";
+import { Image, StyleSheet, View } from "react-native";
 import AppIntroSlider from "react-native-app-intro-slider";
-import { Text, Image, StyleSheet, View } from "react-native";
 import { RFValue } from "react-native-responsive-fontsize";
-
 import {
   useFonts,
   ShortStack_400Regular,
 } from "@expo-google-fonts/short-stack";
 import AppLoading from "expo-app-loading";
-import IMAGES from "./assets";
-import { Theme } from "./theme";
+import { NavigationContainer } from "@react-navigation/native";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import { Provider } from "react-redux";
 
-const slides = [
-  {
-    key: "1",
-    image: IMAGES.startImages.startTasks,
-    text: "Organize sua vida alinhando suas tarefas",
-  },
-  {
-    key: "2",
-    image: IMAGES.startImages.startFood,
-    text: "Organize sua alimentação com a gente",
-  },
-  {
-    key: "3",
-    image: IMAGES.startImages.startDiary,
-    text: "Desabafe sobre seu dia com nosso querido diário",
-  },
-];
+import IMAGES from "./assets";
+import { theme } from "./theme";
+import { StartSlidePage } from "./design";
+import SignIn from "./screens/SignIn";
+import SLIDES from "./mocks/slide";
+import store from "./redux/store";
 
 const styles = StyleSheet.create({
   buttonCircle: {
     width: RFValue(50),
     height: RFValue(50),
-    backgroundColor: Theme.colors.primary,
+    backgroundColor: theme.colors.primary,
     borderRadius: 50,
     justifyContent: "center",
     alignItems: "center",
     marginBottom: 10,
   },
 });
+
+const Stack = createNativeStackNavigator();
 
 function App() {
   const [showHome, setShowHome] = useState<boolean>(false);
@@ -72,18 +62,25 @@ function App() {
     );
   };
 
-  if (showHome) {
-    return <Text>Entrou home</Text>;
-  } else {
-    return (
-      <AppIntroSlider
-        renderItem={renderSlides}
-        data={slides}
-        activeDotStyle={{ backgroundColor: "#000" }}
-        renderNextButton={renderNextButton}
-        renderDoneButton={renderDoneButton}
-      />
-    );
-  }
+  return showHome ? (
+    <Provider store={store}>
+      <NavigationContainer>
+        <Stack.Navigator initialRouteName="SignIn">
+          <Stack.Screen name="SignIn" component={SignIn} />
+        </Stack.Navigator>
+      </NavigationContainer>
+    </Provider>
+  ) : (
+    <AppIntroSlider
+      renderItem={renderSlides}
+      data={SLIDES}
+      activeDotStyle={{ backgroundColor: "#000" }}
+      renderNextButton={renderNextButton}
+      renderDoneButton={renderDoneButton}
+      onDone={() => {
+        setShowHome(true);
+      }}
+    />
+  );
 }
 export default App;
