@@ -1,7 +1,7 @@
 import styled from "styled-components/native";
 import { RFPercentage, RFValue } from "react-native-responsive-fontsize";
 import { Dimensions } from "react-native";
-import { Theme } from "../../../theme";
+import { theme } from "../../../theme";
 
 export const Container = styled.SafeAreaView`
   flex: 1;
@@ -58,7 +58,7 @@ export const NextButton = styled.TouchableOpacity`
   ) / 2};
   width: ${Dimensions.get("window").width * 0.2};
   height: ${Dimensions.get("window").width * 0.2};
-  background-color: ${Theme.colors.primary};
+  background-color: ${theme.colors.primary};
 `;
 
 export const IconNext = styled.Image``;

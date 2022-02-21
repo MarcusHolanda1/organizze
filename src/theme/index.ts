@@ -1,4 +1,6 @@
-export const Theme = {
+import { Theme } from "../types/theme";
+
+export const theme: Theme = {
   colors: {
     error: "#FF6363",
     background: "#FFF",
@@ -7,7 +9,7 @@ export const Theme = {
     primaryBold: "#3B0069",
     secondary: "#F26EBD",
     secondaryLight: "#FDD6ED",
-    noti: "#60E9C0",
-    notiLight: "#C0FAE9",
+    green: "#60E9C0",
+    greenLight: "#C0FAE9",
   },
 };
