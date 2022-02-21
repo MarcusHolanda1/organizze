@@ -4,9 +4,8 @@
   "expo": {
     "name": "organizze",
     "slug": "organizze",
+    "scheme": "organizze",
     "version": "1.0.0",
-    "assetBundlePatterns": [
-      "**/*"
-    ]
+    "assetBundlePatterns": ["**/*"]
   }
 }
