@@ -74,8 +74,3 @@ export const ContentBoxText = styled.View`
   /* background: red; */
   text-align: left;
 `;
-
-export const TextStart = styled.Text`
-  font-size: ${RFValue(22)}px;
-  font-family: "ShortStack_400Regular";
-`;
