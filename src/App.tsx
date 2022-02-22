@@ -4,8 +4,10 @@ import AppIntroSlider from "react-native-app-intro-slider";
 import { RFValue } from "react-native-responsive-fontsize";
 import {
   useFonts,
-  ShortStack_400Regular,
-} from "@expo-google-fonts/short-stack";
+  BalsamiqSans_400Regular,
+  BalsamiqSans_700Bold,
+} from "@expo-google-fonts/balsamiq-sans";
+
 import AppLoading from "expo-app-loading";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
@@ -36,7 +38,8 @@ function App() {
   const [showHome, setShowHome] = useState<boolean>(false);
 
   const [fontsLoaded] = useFonts({
-    ShortStack_400Regular,
+    BalsamiqSans_400Regular,
+    BalsamiqSans_700Bold,
   });
   if (!fontsLoaded) {
     return <AppLoading />;
@@ -63,14 +66,14 @@ function App() {
   };
 
   return showHome ? (
-    <Provider store={store}>
-      <NavigationContainer>
-        <Stack.Navigator initialRouteName="SignIn">
-          <Stack.Screen name="SignIn" component={SignIn} />
-        </Stack.Navigator>
-      </NavigationContainer>
-    </Provider>
+    // <Provider store={store}>
+    <NavigationContainer>
+      <Stack.Navigator initialRouteName="SignIn">
+        <Stack.Screen name="SignIn" component={SignIn} />
+      </Stack.Navigator>
+    </NavigationContainer>
   ) : (
+    // </Provider>
     <AppIntroSlider
       renderItem={renderSlides}
       data={SLIDES}
