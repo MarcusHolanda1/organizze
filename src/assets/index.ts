@@ -18,5 +18,8 @@ const IMAGES = {
     arrowNext: require("./images/bubbles/arrowNext.png"),
     doneNext: require("./images/bubbles/doneNext.png"),
   },
+  login: {
+    google: require("./images/login/google.png"),
+  },
 };
 export default IMAGES;
