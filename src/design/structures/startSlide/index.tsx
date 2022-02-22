@@ -1,10 +1,11 @@
 import React from "react";
 import IMAGES from "../../../assets";
 import * as S from "./styles";
+import { Text } from "../../components";
 
 type Props = {
-  source: any;
-  text: string;
+  source?: any;
+  text?: string;
 };
 
 const StartSlidePage = ({ source, text }: Props) => {
@@ -23,13 +24,10 @@ const StartSlidePage = ({ source, text }: Props) => {
       </S.ContentMid>
       <S.ContentBottom>
         <S.ContentBoxText>
-          <S.TextStart>{text}</S.TextStart>
+          <Text type="h3" color="black">
+            {text}
+          </Text>
         </S.ContentBoxText>
-        {/* <S.ContentButtonNext>
-          <S.NextButton>
-            <S.IconNext source={IMAGES.bubbles.arrowNext} />
-          </S.NextButton>
-        </S.ContentButtonNext> */}
       </S.ContentBottom>
     </S.Container>
   );
