@@ -3,7 +3,7 @@ import { theme } from "../../theme";
 import { RFPercentage, RFValue } from "react-native-responsive-fontsize";
 
 export const Container = styled.View`
-  flex: 0.6;
+  flex: 0.8;
 `;
 
 export const ContentLogin = styled.View`
@@ -33,4 +33,17 @@ export const ContentButtonLogin = styled.View`
 
 export const ContentGoogleImage = styled.View`
   left: ${RFValue(-45)}px;
+`;
+
+export const GoogleImage = styled.Image``;
+
+export const ContentSocialLoginImage = styled.View`
+  flex: 0.6;
+  justify-content: center;
+  align-items: center;
+`;
+
+export const SocialLoginImage = styled.Image`
+  width: ${RFValue(380)}px;
+  height: 100%;
 `;
