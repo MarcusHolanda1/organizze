@@ -12,13 +12,14 @@ import AppLoading from "expo-app-loading";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { Provider } from "react-redux";
+import { PersistGate } from "redux-persist/integration/react";
 
 import IMAGES from "./assets";
 import { theme } from "./theme";
 import { StartSlidePage } from "./design";
 import SignIn from "./screens/SignIn";
 import SLIDES from "./mocks/slide";
-import store from "./redux/store";
+import store, { persistor } from "./redux/store";
 
 const styles = StyleSheet.create({
   buttonCircle: {
@@ -66,14 +67,19 @@ function App() {
   };
 
   return showHome ? (
-    // <Provider store={store}>
-    <NavigationContainer>
-      <Stack.Navigator initialRouteName="SignIn">
-        <Stack.Screen name="SignIn" component={SignIn} />
-      </Stack.Navigator>
-    </NavigationContainer>
+    <Provider store={store}>
+      <PersistGate persistor={persistor}>
+        <NavigationContainer>
+          <Stack.Navigator
+            initialRouteName="SignIn"
+            screenOptions={{ headerShown: false }}
+          >
+            <Stack.Screen name="SignIn" component={SignIn} />
+          </Stack.Navigator>
+        </NavigationContainer>
+      </PersistGate>
+    </Provider>
   ) : (
-    // </Provider>
     <AppIntroSlider
       renderItem={renderSlides}
       data={SLIDES}
