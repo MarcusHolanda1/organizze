@@ -20,6 +20,7 @@ const IMAGES = {
   },
   login: {
     google: require("./images/login/google.png"),
+    socialLogin: require("./images/login/socialLogin.png"),
   },
 };
 export default IMAGES;
