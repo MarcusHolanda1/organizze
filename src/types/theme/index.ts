@@ -21,4 +21,15 @@ export type Theme = {
       fontFamily: string;
     };
   };
+  spacing: {
+    n2: string;
+    n4: string;
+    n6: string;
+    n8: string;
+    n12: string;
+    n16: string;
+    n24: string;
+    n32: string;
+    n40: string;
+  };
 };
