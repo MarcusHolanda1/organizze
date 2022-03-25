@@ -12,4 +12,5 @@ export type DataUser = {
   locale: string;
   given_name: string;
   id: string;
+  email: string;
 };
