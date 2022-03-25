@@ -12,7 +12,7 @@ import { RFValue } from "react-native-responsive-fontsize";
 import Icon, { FilterIcons } from "../../components/Icons";
 import Home from "../../../screens/Home";
 import { theme } from "../../../theme";
-import UserConfig from "../../../screens/UserConfig";
+import Profile from "../../../screens/Profile";
 import Activities from "../../../screens/Activities";
 
 interface MyTab {
@@ -43,11 +43,11 @@ const TabArr: Array<{
     component: Home,
   },
   {
-    route: "UserConfig",
+    route: "Profile",
     type: FilterIcons?.AntDesign,
     activeIcon: "user",
     inActiveIcon: "user",
-    component: UserConfig,
+    component: Profile,
   },
 ];
 
