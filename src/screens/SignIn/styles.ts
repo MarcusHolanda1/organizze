@@ -1,6 +1,6 @@
 import styled from "styled-components/native";
 import { theme } from "../../theme";
-import { RFPercentage, RFValue } from "react-native-responsive-fontsize";
+import { RFValue } from "react-native-responsive-fontsize";
 
 export const Container = styled.View`
   flex: 0.8;
@@ -12,6 +12,7 @@ export const ContentLogin = styled.View`
   background-color: ${theme.colors.backgroundLogin};
   border-top-left-radius: 30px;
   border-top-right-radius: 30px;
+  padding: ${RFValue(theme.spacing.n12)}px;
 `;
 
 export const ButtonLogin = styled.TouchableOpacity.attrs({
@@ -21,8 +22,8 @@ export const ButtonLogin = styled.TouchableOpacity.attrs({
   flex-direction: row;
   align-items: center
   background-color: ${theme.colors.primary};
-  padding: ${RFValue(18)}px;
-  width: ${RFPercentage(52)}px;
+  padding: ${RFValue(theme.spacing.n16)}px;
+  width: 100%;
   border-radius: 30px;
 `;
 
