@@ -2,8 +2,8 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { DataUser, AuthResponse } from "../../../types/responses";
 
 const initialState = {
-  dataUser: {} as DataUser,
-  responseAuth: {} as AuthResponse,
+  dataUser: {} as DataUser | null,
+  responseAuth: {} as AuthResponse | null,
   isAuth: false,
 };
 
@@ -14,8 +14,19 @@ const authSlice = createSlice({
     setResponseLoginUser: (state, action: PayloadAction<AuthResponse>) => {
       state.responseAuth = action.payload;
     },
+    setLogoutUser: (state) => {
+      state.responseAuth = null;
+      state.dataUser = null;
+      state.isAuth = false;
+    },
     setDataUser: (state, action: PayloadAction<DataUser>) => {
       state.dataUser = action.payload;
+      state.isAuth = true;
+    },
+    setIsAuthFalse: (state) => {
+      state.isAuth = false;
+    },
+    setIsAuthTrue: (state) => {
       state.isAuth = true;
     },
   },
@@ -23,5 +34,11 @@ const authSlice = createSlice({
 
 const { reducer, actions } = authSlice;
 
-export const { setResponseLoginUser, setDataUser } = actions;
+export const {
+  setResponseLoginUser,
+  setDataUser,
+  setLogoutUser,
+  setIsAuthFalse,
+  setIsAuthTrue,
+} = actions;
 export default reducer;
