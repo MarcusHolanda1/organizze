@@ -21,9 +21,9 @@ import { theme } from "../theme";
 
 const Stack = createNativeStackNavigator();
 
-function MainApp({ navigation }: any) {
+function MainApp() {
   const [showHome, setShowHome] = useState<boolean>(false);
-  const { dataUser } = useStorage();
+  const { isAuth } = useStorage();
 
   const [fontsLoaded] = useFonts({
     BalsamiqSans_400Regular,
@@ -59,7 +59,7 @@ function MainApp({ navigation }: any) {
         initialRouteName="SignIn"
         screenOptions={{ headerShown: false }}
       >
-        {dataUser ? (
+        {isAuth === true ? (
           <Stack.Screen
             name="BottomTabNavigate"
             component={BottomTabNavigate}
