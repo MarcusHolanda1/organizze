@@ -22,14 +22,14 @@ export type Theme = {
     };
   };
   spacing: {
-    n2: string;
-    n4: string;
-    n6: string;
-    n8: string;
-    n12: string;
-    n16: string;
-    n24: string;
-    n32: string;
-    n40: string;
+    n2: number;
+    n4: number;
+    n6: number;
+    n8: number;
+    n12: number;
+    n16: number;
+    n24: number;
+    n32: number;
+    n40: number;
   };
 };
