@@ -5,6 +5,7 @@ const initialState = {
   dataUser: {} as DataUser | null,
   responseAuth: {} as AuthResponse | null,
   isAuth: false,
+  showHome: false,
 };
 
 const authSlice = createSlice({
@@ -23,11 +24,11 @@ const authSlice = createSlice({
       state.dataUser = action.payload;
       state.isAuth = true;
     },
-    setIsAuthFalse: (state) => {
+    setAuthState: (state) => {
       state.isAuth = false;
     },
-    setIsAuthTrue: (state) => {
-      state.isAuth = true;
+    setShowHome: (state) => {
+      state.showHome = true;
     },
   },
 });
@@ -38,7 +39,7 @@ export const {
   setResponseLoginUser,
   setDataUser,
   setLogoutUser,
-  setIsAuthFalse,
-  setIsAuthTrue,
+  setAuthState,
+  setShowHome,
 } = actions;
 export default reducer;
