@@ -1,11 +1,7 @@
 import React, { useCallback, useEffect } from "react";
 import * as AuthSession from "expo-auth-session";
 import { useDispatch } from "react-redux";
-import {
-  setIsAuthFalse,
-  setIsAuthTrue,
-  setResponseLoginUser,
-} from "../../redux/slices/auth";
+import { setResponseLoginUser } from "../../redux/slices/auth";
 
 import { AuthResponse } from "../../types/responses";
 import { StartSlidePage, Text } from "../../design";
@@ -20,13 +16,6 @@ const { REDIRECT_URI } = process.env;
 const SignIn = () => {
   const dispatch = useDispatch();
   const { responseAuth } = useStorage();
-
-  useEffect(() => {
-    if (responseAuth) {
-      dispatch(setIsAuthFalse());
-    }
-  }, []);
-
   const handleSignIn = useCallback(async () => {
     const authUrl = `https://accounts.google.com/o/oauth2/v2/auth?client_id=${CLIENT_ID}&redirect_uri=${REDIRECT_URI}&response_type=${RESPONSE_TYPE}&scope=${SCOPE}`;
     const { type, params } = (await AuthSession.startAsync({
@@ -35,7 +24,6 @@ const SignIn = () => {
 
     if (type === "success") {
       dispatch(setResponseLoginUser(params.access_token));
-      dispatch(setIsAuthTrue());
     }
   }, []);
 
