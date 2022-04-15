@@ -13,4 +13,9 @@ export type DataUser = {
   given_name: string;
   id: string;
   email: string;
+  error: {
+    code: number;
+    message: string;
+    status: string;
+  };
 };
