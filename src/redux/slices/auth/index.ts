@@ -1,10 +1,9 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { DataUser, AuthResponse } from "../../../types/responses";
+import { DataUser } from "../../../types/responses";
 
 const initialState = {
   dataUser: {} as DataUser | null,
-  responseAuth: {} as AuthResponse | null,
-  isAuth: false,
+  authenticated: false,
   showHome: false,
 };
 
@@ -12,22 +11,19 @@ const authSlice = createSlice({
   name: "auth",
   initialState,
   reducers: {
-    setResponseLoginUser: (state, action: PayloadAction<AuthResponse>) => {
-      state.responseAuth = action.payload;
+    setAuthenticated: (
+      state: { authenticated: boolean },
+      action: { payload: boolean }
+    ) => {
+      state.authenticated = action.payload;
     },
-    setLogoutUser: (state) => {
-      state.responseAuth = null;
-      state.dataUser = null;
-      state.isAuth = false;
-    },
-    setDataUser: (state, action: PayloadAction<DataUser>) => {
+    setDataUser: (
+      state: { dataUser: DataUser | null },
+      action: PayloadAction<DataUser | null>
+    ) => {
       state.dataUser = action.payload;
-      state.isAuth = true;
     },
-    setAuthState: (state) => {
-      state.isAuth = false;
-    },
-    setShowHome: (state) => {
+    setShowHome: (state: { showHome: boolean }) => {
       state.showHome = true;
     },
   },
@@ -35,11 +31,5 @@ const authSlice = createSlice({
 
 const { reducer, actions } = authSlice;
 
-export const {
-  setResponseLoginUser,
-  setDataUser,
-  setLogoutUser,
-  setAuthState,
-  setShowHome,
-} = actions;
+export const { setAuthenticated, setDataUser, setShowHome } = actions;
 export default reducer;
