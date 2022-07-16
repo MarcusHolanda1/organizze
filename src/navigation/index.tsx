@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Image, StyleSheet, View } from "react-native";
 import AppIntroSlider from "react-native-app-intro-slider";
 import { RFValue } from "react-native-responsive-fontsize";
@@ -8,11 +8,10 @@ import {
   BalsamiqSans_700Bold,
 } from "@expo-google-fonts/balsamiq-sans";
 import AppLoading from "expo-app-loading";
-import { NavigationContainer } from "@react-navigation/native";
+import { NavigationContainer, useIsFocused } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import { useDispatch } from "react-redux";
 
-import { useStorage } from "../redux/hooks";
+import { useStorage, useDispatchStorage } from "../redux/hooks";
 import { StartSlidePage } from "../design";
 import IMAGES from "../assets";
 import BottomTabNavigate from "../design/structures/BottomTabNavigate";
@@ -24,9 +23,9 @@ import { setShowHome } from "../redux/slices/auth";
 const Stack = createNativeStackNavigator();
 
 function MainApp() {
-  const { responseAuth, showHome } = useStorage();
+  const { authenticated, showHome } = useStorage();
 
-  const dispatch = useDispatch();
+  const dispatch = useDispatchStorage();
 
   const [fontsLoaded] = useFonts({
     BalsamiqSans_400Regular,
@@ -62,7 +61,7 @@ function MainApp() {
         initialRouteName="SignIn"
         screenOptions={{ headerShown: false }}
       >
-        {responseAuth ? (
+        {authenticated ? (
           <Stack.Screen
             name="BottomTabNavigate"
             component={BottomTabNavigate}
