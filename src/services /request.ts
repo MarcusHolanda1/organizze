@@ -2,51 +2,45 @@ import axios, { AxiosRequestConfig } from "axios";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { Alert } from "react-native";
 
-import { checkIfTokenExpired } from "../utils";
 import * as RootNavigation from "./navigation";
 import ReduxStore from "../redux/store";
 import { setAuthenticated } from "../redux/slices/auth";
 
-axios.interceptors.response.use(async (config) => {
-  try {
-    const expires_in = await AsyncStorage.getItem("@expires_in");
-
-    if (expires_in) {
-      const tokenIsExpired = checkIfTokenExpired(expires_in);
-
-      if (tokenIsExpired) {
-        await AsyncStorage.removeItem("@token");
-
-        Alert.alert(
-          "Sessão expirada",
-          "Por favor, faça o login novamente.",
-          [
-            {
-              text: "OK",
-              onPress: () => {
-                ReduxStore.dispatch(setAuthenticated(false)),
-                  RootNavigation.navigate("SignIn");
-              },
-
-              style: "cancel",
+axios.interceptors.response.use(
+  async (response) => {
+    return response;
+  },
+  async function (error) {
+    if (error.response.status === 401) {
+      Alert.alert(
+        "Sessão expirada",
+        "Por favor, faça o login novamente.",
+        [
+          {
+            text: "OK",
+            onPress: async () => {
+              ReduxStore.dispatch(setAuthenticated(false)),
+                RootNavigation.navigate("SignIn"),
+                await AsyncStorage.removeItem("@token");
             },
-          ],
-          { cancelable: false }
-        );
-      }
-    }
-    return config;
-  } catch (error: any) {
-    return Promise.reject(error.response.data);
-  }
-});
 
-const request = async ({ url, method, data }: AxiosRequestConfig) => {
+            style: "cancel",
+          },
+        ],
+        { cancelable: false }
+      );
+    }
+    return Promise.reject(error);
+  }
+);
+
+const request = async ({ url, method, data, headers }: AxiosRequestConfig) => {
   try {
     const config = {
       url,
       method,
       data,
+      headers,
     };
 
     const response = await axios(config);
