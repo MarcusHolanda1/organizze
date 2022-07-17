@@ -15,37 +15,17 @@ const Text = ({
   color = theme.colors.background,
   fontFamily = theme.fonts.regular.fontFamily,
 }: Props) => {
-  switch (type) {
-    case "h1":
-      return (
-        <S.H1 fontFamily={fontFamily} color={color}>
-          {children}
-        </S.H1>
-      );
-    case "h3":
-      return (
-        <S.H3 fontFamily={fontFamily} color={color}>
-          {children}
-        </S.H3>
-      );
-    case "h4":
-      return (
-        <S.H4 fontFamily={fontFamily} color={color}>
-          {children}
-        </S.H4>
-      );
-    case "small":
-      return (
-        <S.SMALL fontFamily={fontFamily} color={color}>
-          {children}
-        </S.SMALL>
-      );
-    default:
-      return (
-        <S.P fontFamily={fontFamily} color={color}>
-          {children}
-        </S.P>
-      );
-  }
+  const TextComponent = {
+    h1: S.H1,
+    h3: S.H3,
+    h4: S.H4,
+    p: S.P,
+    small: S.SMALL,
+  }[type];
+  return (
+    <TextComponent color={color} fontFamily={fontFamily}>
+      {children}
+    </TextComponent>
+  );
 };
 export default Text;
