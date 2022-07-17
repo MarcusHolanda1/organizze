@@ -1,4 +1,30 @@
-const IMAGES = {
+type ImagesTypes = {
+  startImages: {
+    startDiary: string;
+    startFood: string;
+    startLogin: string;
+    startTasks: string;
+  };
+  weatherImages: {
+    weatherCloud: string;
+    weatherRain: string;
+    weatherSnow: string;
+    weatherSunAndCloud: string;
+    weatherSunny: string;
+  };
+  bubbles: {
+    bubbleRight: string;
+    bubbleLeft: string;
+    arrowNext: string;
+    doneNext: string;
+  };
+  login: {
+    google: string;
+    socialLogin: string;
+  };
+};
+
+const IMAGES: ImagesTypes = {
   startImages: {
     startDiary: require("./images/startImages/startDiary.png"),
     startFood: require("./images/startImages/startFood.png"),
@@ -6,11 +32,11 @@ const IMAGES = {
     startTasks: require("./images/startImages/startTasks.png"),
   },
   weatherImages: {
-    weatherCloud: require("./images/weatherImages/weatherCloud.png"),
-    weatherRain: require("./images/weatherImages/weatherRain.png"),
-    weatherSnow: require("./images/weatherImages/weatherSnow.png"),
-    weatherSunAndCloud: require("./images/weatherImages/weatherSunAndCloud.png"),
-    weatherSunny: require("./images/weatherImages/weatherSunny.png"),
+    weatherCloud: require("./images/weatherImages/weatherCloud.svg"),
+    weatherRain: require("./images/weatherImages/weatherRain.svg"),
+    weatherSnow: require("./images/weatherImages/weatherSnow.svg"),
+    weatherSunAndCloud: require("./images/weatherImages/weatherSunAndCloud.svg"),
+    weatherSunny: require("./images/weatherImages/weatherSunny.svg"),
   },
   bubbles: {
     bubbleRight: require("./images/bubbles/bubbleRight.png"),
