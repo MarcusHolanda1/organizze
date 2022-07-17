@@ -28,6 +28,8 @@ export type Theme = {
     n8: number;
     n12: number;
     n16: number;
+    n18: number;
+    n20: number;
     n24: number;
     n32: number;
     n40: number;
