@@ -5,3 +5,9 @@ export const checkIfTokenExpired = (expires_in: string) => {
 
   return expires_in_date < timeNow;
 };
+
+export const getDateNow = () => {
+  const date = new Date();
+
+  return date.toLocaleDateString("pt-BR");
+};
