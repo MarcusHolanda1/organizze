@@ -1,4 +1,4 @@
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { RootState } from "../store/";
 
 export const useStorage = () => {
@@ -7,3 +7,5 @@ export const useStorage = () => {
     ...authReducer,
   };
 };
+
+export const useDispatchStorage = () => useDispatch();

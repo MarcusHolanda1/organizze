@@ -8,22 +8,24 @@ import {
   BalsamiqSans_700Bold,
 } from "@expo-google-fonts/balsamiq-sans";
 import AppLoading from "expo-app-loading";
-import { NavigationContainer } from "@react-navigation/native";
+import { NavigationContainer, useIsFocused } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
-import { useStorage } from "../redux/hooks";
+import { useStorage, useDispatchStorage } from "../redux/hooks";
 import { StartSlidePage } from "../design";
 import IMAGES from "../assets";
 import BottomTabNavigate from "../design/structures/BottomTabNavigate";
 import SignIn from "../screens/SignIn";
 import SLIDES from "../mocks/slide";
 import { theme } from "../theme";
+import { setShowHome } from "../redux/slices/auth";
 
 const Stack = createNativeStackNavigator();
 
 function MainApp() {
-  const [showHome, setShowHome] = useState<boolean>(false);
-  const { isAuth } = useStorage();
+  const { authenticated, showHome } = useStorage();
+
+  const dispatch = useDispatchStorage();
 
   const [fontsLoaded] = useFonts({
     BalsamiqSans_400Regular,
@@ -59,7 +61,7 @@ function MainApp() {
         initialRouteName="SignIn"
         screenOptions={{ headerShown: false }}
       >
-        {isAuth === true ? (
+        {authenticated ? (
           <Stack.Screen
             name="BottomTabNavigate"
             component={BottomTabNavigate}
@@ -77,7 +79,7 @@ function MainApp() {
       renderNextButton={renderNextButton}
       renderDoneButton={renderDoneButton}
       onDone={() => {
-        setShowHome(true);
+        dispatch(setShowHome());
       }}
     />
   );
