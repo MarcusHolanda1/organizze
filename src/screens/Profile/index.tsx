@@ -5,17 +5,17 @@ import { Image, Alert } from "react-native";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 
 import { Page, Text } from "../../design";
-import { useStorage } from "../../redux/hooks";
+import { useStorage, useDispatchStorage } from "../../redux/hooks";
 import { theme } from "../../theme";
-import { useDispatch } from "react-redux";
-import { setLogoutUser } from "../../redux/slices/auth";
+import { setDataUser, setAuthenticated } from "../../redux/slices/auth";
 
 const Profile = () => {
   const { dataUser } = useStorage();
-  const dispatch = useDispatch();
+  const dispatch = useDispatchStorage();
 
   const handleLogout = () => {
-    dispatch(setLogoutUser());
+    dispatch(setDataUser(null));
+    dispatch(setAuthenticated(false));
   };
 
   const alertLogout = () =>
