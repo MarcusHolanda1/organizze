@@ -30,6 +30,8 @@ export const theme: Theme = {
     n8: 8,
     n12: 12,
     n16: 16,
+    n18: 18,
+    n20: 20,
     n24: 24,
     n32: 32,
     n40: 40,
