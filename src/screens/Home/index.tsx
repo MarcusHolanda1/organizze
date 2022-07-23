@@ -5,7 +5,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import { Alert } from "react-native";
 
 import * as S from "./styles";
-import { Page, Text, CardHome } from "../../design";
+import { Page, Text, Card } from "../../design";
 import { theme } from "../../theme";
 import { useStorage, useDispatchStorage } from "../../redux/hooks";
 import { setDataUser } from "../../redux/slices/auth";
@@ -137,39 +137,41 @@ const Home = () => {
           Olá, {dataUser?.given_name}
         </Text>
       </S.HelloContent>
-      <CardHome>
-        <S.ContentTitleAndData>
-          <S.ContentTitle>
-            <Text type="h4" color={theme.colors.primaryBold}>
-              {currentTemperature?.phrase}
-            </Text>
-          </S.ContentTitle>
-          <Text type="small">{dateNow}</Text>
-        </S.ContentTitleAndData>
-        <S.ContentImageAndInformation>
-          <S.ContainertDegress>
-            <Text
-              type="h1"
-              fontFamily={theme.fonts.bold.fontFamily}
-              color={theme.colors.primaryMedium}
-            >
-              {weatherData?.current.temp_c}
-              <S.ContentDegreesText>
-                <Text type="p" color={theme.colors.primaryMedium}>
-                  ºc
-                </Text>
-              </S.ContentDegreesText>
-            </Text>
-            <S.ContentLocationName>
-              <Text type="small">{weatherData?.location.name}</Text>
-            </S.ContentLocationName>
-          </S.ContainertDegress>
+      <Card>
+        <S.Container>
+          <S.ContentTitleAndData>
+            <S.ContentTitle>
+              <Text type="h4" color={theme.colors.primaryBold}>
+                {currentTemperature?.phrase}
+              </Text>
+            </S.ContentTitle>
+            <Text type="small">{dateNow}</Text>
+          </S.ContentTitleAndData>
+          <S.ContentImageAndInformation>
+            <S.ContainertDegress>
+              <Text
+                type="h1"
+                fontFamily={theme.fonts.bold.fontFamily}
+                color={theme.colors.primaryMedium}
+              >
+                {weatherData?.current.temp_c}
+                <S.ContentDegreesText>
+                  <Text type="p" color={theme.colors.primaryMedium}>
+                    ºc
+                  </Text>
+                </S.ContentDegreesText>
+              </Text>
+              <S.ContentLocationName>
+                <Text type="small">{weatherData?.location.name}</Text>
+              </S.ContentLocationName>
+            </S.ContainertDegress>
 
-          <S.ContentFooterCard>
-            <DynamicSvg type={currentTemperature?.name} />
-          </S.ContentFooterCard>
-        </S.ContentImageAndInformation>
-      </CardHome>
+            <S.ContentFooterCard>
+              <DynamicSvg type={currentTemperature?.name} />
+            </S.ContentFooterCard>
+          </S.ContentImageAndInformation>
+        </S.Container>
+      </Card>
     </Page>
   );
 };

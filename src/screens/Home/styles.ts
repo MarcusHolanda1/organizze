@@ -2,6 +2,11 @@ import { RFValue, RFPercentage } from "react-native-responsive-fontsize";
 import styled from "styled-components/native";
 import { theme } from "../../theme";
 
+export const Container = styled.View`
+  padding: ${RFValue(theme.spacing.n8)}px ${RFValue(theme.spacing.n8)}px 0
+    ${RFValue(theme.spacing.n8)}px;
+`;
+
 export const HelloContent = styled.View`
   justify-content: space-between;
   flex-direction: row;
