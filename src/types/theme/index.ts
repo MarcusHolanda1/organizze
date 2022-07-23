@@ -12,6 +12,7 @@ export type Theme = {
     greenLight: string;
     backgroundLogin: string;
     black: string;
+    ice: string;
   };
   fonts: {
     regular: {
@@ -26,6 +27,7 @@ export type Theme = {
     n4: number;
     n6: number;
     n8: number;
+    n10: number;
     n12: number;
     n16: number;
     n18: number;
