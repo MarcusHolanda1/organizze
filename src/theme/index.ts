@@ -14,6 +14,7 @@ export const theme: Theme = {
     greenLight: "#C0FAE9",
     backgroundLogin: "#AF9AFD",
     black: "#000",
+    ice: "#F2EBFF",
   },
   fonts: {
     regular: {
@@ -28,6 +29,7 @@ export const theme: Theme = {
     n4: 4,
     n6: 6,
     n8: 8,
+    n10: 10,
     n12: 12,
     n16: 16,
     n18: 18,
