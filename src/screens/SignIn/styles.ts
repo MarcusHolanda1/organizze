@@ -15,19 +15,7 @@ export const ContentLogin = styled.View`
   padding: ${RFValue(theme.spacing.n12)}px;
 `;
 
-export const ButtonLogin = styled.TouchableOpacity.attrs({
-  activeOpacity: 0.7,
-})`
-  justify-content: center;
-  flex-direction: row;
-  align-items: center
-  background-color: ${theme.colors.primary};
-  padding: ${RFValue(theme.spacing.n16)}px;
-  width: 100%;
-  border-radius: 30px;
-`;
-
-export const ContentButtonLogin = styled.View`
+export const ContainerButton = styled.View`
   justify-content: center;
   align-items: center;
 `;
@@ -47,4 +35,11 @@ export const ContentSocialLoginImage = styled.View`
 export const SocialLoginImage = styled.Image`
   width: ${RFValue(380)}px;
   height: 100%;
+`;
+
+export const ContentButton = styled.View`
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+  width: 100%;
 `;

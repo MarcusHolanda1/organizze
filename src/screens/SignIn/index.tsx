@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect } from "react";
+import React, { useCallback } from "react";
 import * as AuthSession from "expo-auth-session";
 
 import { setAuthenticated } from "../../redux/slices/auth";
@@ -10,6 +10,8 @@ import * as S from "./styles";
 import IMAGES from "../../assets";
 import { RESPONSE_TYPE, SCOPE } from "../../config/Google.js";
 import { useDispatchStorage } from "../../redux/hooks";
+import { PrimaryButton } from "../../design/components";
+import { theme } from "../../theme";
 
 interface IAuthSession {
   type: string;
@@ -48,14 +50,19 @@ const SignIn = () => {
       </S.ContentSocialLoginImage>
       <S.Container>
         <S.ContentLogin>
-          <S.ContentButtonLogin>
-            <S.ButtonLogin onPress={handleSignIn}>
-              <S.ContentGoogleImage>
-                <S.GoogleImage source={IMAGES.login.google} />
-              </S.ContentGoogleImage>
-              <Text type="h4">Entrar com o google</Text>
-            </S.ButtonLogin>
-          </S.ContentButtonLogin>
+          <S.ContainerButton>
+            <PrimaryButton
+              backgroundColor={theme.colors.primaryMedium}
+              onPress={handleSignIn}
+            >
+              <S.ContentButton>
+                <S.ContentGoogleImage>
+                  <S.GoogleImage source={IMAGES.login.google} />
+                </S.ContentGoogleImage>
+                <Text type="h4">Entrar com o google</Text>
+              </S.ContentButton>
+            </PrimaryButton>
+          </S.ContainerButton>
         </S.ContentLogin>
       </S.Container>
     </>
