@@ -66,79 +66,31 @@ const Home = () => {
   };
 
   const loadCurrentLocation = async () => {
-    try {
-      const response = await request({
-        url: `${WEATHER_API}/current.json?key=${WEATHER_KEY}&q=${location?.coords.latitude},${location?.coords.longitude}&aqi=no`,
-        method: "GET",
-      });
+    const response = await request({
+      url: `${WEATHER_API}/current.json?key=${WEATHER_KEY}&q=${location?.coords.latitude},${location?.coords.longitude}&aqi=no`,
+      method: "GET",
+    });
 
-      setWeatherData(response.data);
-    } catch (error: any) {
-      return error.response.data;
-    }
+    setWeatherData(response.data);
   };
 
-  const filterConditions = () => {
-    weatherConditionsMock.filter((condition) => {
-      if (weatherData) {
-        if (
-          condition.sunny.nightCondition.includes(
-            weatherData?.current.condition.text
-          )
-        ) {
-          setCurrentTemperature({
-            phrase: condition.sunny.nightPhrase,
-            name: condition.sunny.name,
-          });
+  const filterConditionWithMock = () => {
+    const currentCondition = weatherData?.current.condition;
+    if (currentCondition) {
+      const conditionMock = weatherConditionsMock.find((conditionMock) => {
+        if (currentCondition.text !== conditionMock.nightPhrase) {
+          return conditionMock.condition.includes(currentCondition?.text);
+        } else {
+          return conditionMock.nightCondition;
         }
-        if (
-          condition.sunny.condition.includes(
-            weatherData?.current.condition.text
-          )
-        ) {
-          setCurrentTemperature({
-            phrase: condition.sunny.phrase,
-            name: condition.sunny.name,
-          });
-        }
-        if (
-          condition.cloud.condition.includes(
-            weatherData?.current.condition.text
-          )
-        ) {
-          setCurrentTemperature({
-            phrase: condition.cloud.phrase,
-            name: condition.cloud.name,
-          });
-        }
-        if (
-          condition.partlyCloud.condition.includes(
-            weatherData?.current.condition.text
-          )
-        ) {
-          setCurrentTemperature({
-            phrase: condition.partlyCloud.phrase,
-            name: condition.partlyCloud.name,
-          });
-        }
-        if (
-          condition.rain.condition.includes(weatherData?.current.condition.text)
-        ) {
-          setCurrentTemperature({
-            phrase: condition.rain.phrase,
-            name: condition.rain.name,
-          });
-        }
-        if (
-          condition.snow.condition.includes(weatherData?.current.condition.text)
-        ) {
-          setCurrentTemperature({
-            phrase: condition.snow.phrase,
-            name: condition.snow.name,
-          });
-        }
+      });
+      if (conditionMock) {
+        setCurrentTemperature({
+          name: conditionMock.name,
+          phrase: conditionMock.phrase,
+        });
       }
-    });
+    }
   };
 
   useEffect(() => {
@@ -170,7 +122,7 @@ const Home = () => {
 
   useEffect(() => {
     if (weatherData) {
-      filterConditions();
+      filterConditionWithMock();
     }
   }, [weatherData]);
 
