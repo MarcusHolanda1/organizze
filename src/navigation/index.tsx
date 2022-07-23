@@ -8,7 +8,7 @@ import {
   BalsamiqSans_700Bold,
 } from "@expo-google-fonts/balsamiq-sans";
 import AppLoading from "expo-app-loading";
-import { NavigationContainer, useIsFocused } from "@react-navigation/native";
+import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
 import { useStorage, useDispatchStorage } from "../redux/hooks";
@@ -16,11 +16,18 @@ import { StartSlidePage } from "../design";
 import IMAGES from "../assets";
 import BottomTabNavigate from "../design/structures/BottomTabNavigate";
 import SignIn from "../screens/SignIn";
+import Tasks from "../screens/Tasks";
 import SLIDES from "../mocks/slide";
 import { theme } from "../theme";
 import { setShowHome } from "../redux/slices/auth";
 
 const Stack = createNativeStackNavigator();
+
+export type RootStackParamList = {
+  SignIn: undefined;
+  BottomTabNavigate: undefined;
+  Tasks: undefined;
+};
 
 function MainApp() {
   const { authenticated, showHome } = useStorage();
@@ -62,10 +69,13 @@ function MainApp() {
         screenOptions={{ headerShown: false }}
       >
         {authenticated ? (
-          <Stack.Screen
-            name="BottomTabNavigate"
-            component={BottomTabNavigate}
-          />
+          <>
+            <Stack.Screen
+              name="BottomTabNavigate"
+              component={BottomTabNavigate}
+            />
+            <Stack.Screen name="Tasks" component={Tasks} />
+          </>
         ) : (
           <Stack.Screen name="SignIn" component={SignIn} />
         )}
