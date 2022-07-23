@@ -32,8 +32,14 @@ export const P = styled.Text<Text>`
   font-family: ${(props) => props.fontFamily};
 `;
 
+export const P12 = styled.Text<Text>`
+  color: ${(props) => props.color};
+  font-size: ${RFValue(12)}px;
+  font-family: ${(props) => props.fontFamily};
+`;
+
 export const SMALL = styled.Text<Text>`
   color: ${(props) => props.color};
-  font-size: ${RFValue(8)}px;
+  font-size: ${RFValue(10)}px;
   font-family: ${(props) => props.fontFamily};
 `;
