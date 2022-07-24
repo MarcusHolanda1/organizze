@@ -20,6 +20,7 @@ import Tasks from "../screens/Tasks";
 import SLIDES from "../mocks/slide";
 import { theme } from "../theme";
 import { setShowHome } from "../redux/slices/auth";
+import { Swipe } from "../screens/Tasks/teste";
 
 const Stack = createNativeStackNavigator();
 
@@ -27,6 +28,7 @@ export type RootStackParamList = {
   SignIn: undefined;
   BottomTabNavigate: undefined;
   Tasks: undefined;
+  Swipe: undefined;
 };
 
 function MainApp() {
@@ -75,6 +77,7 @@ function MainApp() {
               component={BottomTabNavigate}
             />
             <Stack.Screen name="Tasks" component={Tasks} />
+            <Stack.Screen name="Swipe" component={Swipe} />
           </>
         ) : (
           <Stack.Screen name="SignIn" component={SignIn} />

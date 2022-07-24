@@ -13,7 +13,8 @@ export const ContentHeader = styled.View`
 export const Container = styled.View`
   flex-direction: column;
   flex: 1;
-  padding: ${RFValue(theme.spacing.n16)}px;
+  padding: 0 ${RFValue(theme.spacing.n16)}px ${RFValue(theme.spacing.n12)}px
+    ${RFValue(theme.spacing.n16)}px;
 `;
 
 export const ContainerButtonCreateTask = styled.View`
@@ -36,10 +37,12 @@ export const Header = styled.View`
 
 export const ContentFlatlist = styled.View`
   padding-left: ${RFValue(theme.spacing.n8)}px;
+  padding-bottom: ${RFValue(theme.spacing.n8)}px;
 `;
 
 export const ContentCardTasks = styled.View`
   padding: ${RFValue(theme.spacing.n8)}px;
+
   flex-direction: row;
   justify-content: space-between;
 `;
