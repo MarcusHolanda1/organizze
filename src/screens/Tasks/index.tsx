@@ -1,18 +1,25 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 
 import { useNavigation } from "@react-navigation/native";
 
-import { FlatList, GestureResponderEvent, StyleSheet } from "react-native";
+import {
+  FlatList,
+  GestureResponderEvent,
+  StyleSheet,
+  Platform,
+} from "react-native";
 
 import * as S from "./styles";
 import { Text, Page, PrimaryButton, Card } from "../../design";
 import { theme } from "../../theme";
+import { BottomSheetRefProps } from "../../design/components/BottomSheet";
+import BottomSheetTask from "./bottomSheet";
+
 import { TouchableOpacity, View } from "react-native";
 import { MaterialIcons, Feather } from "@expo/vector-icons";
 import { SwipeListView } from "react-native-swipe-list-view";
 import { RFValue } from "react-native-responsive-fontsize";
 import Animated from "react-native-reanimated";
-
 interface IScrollItems {
   id: string;
   title: string;
@@ -125,6 +132,18 @@ const renderItem2 = () => (
 const Tasks = () => {
   const [selectedId, setSelectedId] = useState(null);
   const [listData, setListData] = useState(initialList);
+
+  const refBottomSheet = useRef<BottomSheetRefProps>(null);
+
+  const handleTriggerBottomSheet = () => {
+    const isActive = refBottomSheet?.current?.isActive?.();
+
+    if (isActive) {
+      refBottomSheet?.current?.scrollTo?.(0);
+    } else {
+      refBottomSheet?.current?.scrollTo?.(-750);
+    }
+  };
 
   const navigation = useNavigation();
 
@@ -278,7 +297,7 @@ const Tasks = () => {
         <S.Container>
           <S.ContainerButtonCreateTask>
             <PrimaryButton
-              onPress={() => {}}
+              onPress={handleTriggerBottomSheet}
               backgroundColor={theme.colors.primaryMedium}
             >
               <S.ContentButton>
@@ -291,22 +310,22 @@ const Tasks = () => {
           </S.ContainerButtonCreateTask>
         </S.Container>
       </Page>
+      <BottomSheetTask
+        handleCreateTask={() => {}}
+        refBottomSheet={refBottomSheet}
+      />
     </>
   );
 };
 export default Tasks;
 
 const styles = StyleSheet.create({
-  container: {
-    // height: "100%",
-  },
+  container: {},
   backTextWhite: {
     color: "#FFF",
   },
   rowFront: {
     alignItems: "center",
-    // backgroundColor: "#CCC",
-
     justifyContent: "center",
   },
   rowBack: {
@@ -327,7 +346,7 @@ const styles = StyleSheet.create({
   backRightBtnLeft: {
     backgroundColor: theme.colors.primaryMedium,
     right: RFValue(90),
-    height: RFValue(78),
+    height: Platform.OS === "android" ? RFValue(84) : RFValue(78),
   },
   backRightBtnRight: {
     width: 90,
@@ -335,7 +354,7 @@ const styles = StyleSheet.create({
     right: 18,
     borderTopRightRadius: RFValue(theme.spacing.n8),
     borderBottomRightRadius: RFValue(theme.spacing.n8),
-    height: RFValue(78),
+    height: Platform.OS === "android" ? RFValue(84) : RFValue(78),
   },
   trash: {
     height: 25,

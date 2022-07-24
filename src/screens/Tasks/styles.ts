@@ -28,8 +28,7 @@ export const ContainerButtonCreateTask = styled.View`
   justify-content: center;
   align-items: center;
   width: 100%;
-  bottom: ${RFValue(50)}px;
-
+  bottom: ${Platform.OS === "android" ? RFValue(80) : RFValue(50)}px;
   left: 0;
 `;
 export const ContentButton = styled.View`
@@ -65,7 +64,7 @@ export const ContentCalendar = styled.View`
 export const StatusCircle = styled.View`
   width: ${RFValue(12)}px;
   height: ${RFValue(12)}px;
-  border-radius: 44/2;
+  border-radius: ${44 / 2}px;
   background: red;
 `;
 
@@ -74,4 +73,24 @@ export const ContentLeft = styled.View``;
 export const ContentRight = styled.View`
   justify-content: center;
   align-items: center;
+`;
+
+export const ContainerBottomSheet = styled.View`
+  padding: ${RFValue(theme.spacing.n16)}px;
+`;
+
+export const ContentAddTitle = styled.View`
+  flex-direction: row;
+  align-items: center;
+`;
+
+export const ContentValidateTask = styled.View`
+  flex-direction: row;
+  align-items: center;
+`;
+
+export const ContentValidateAndPriority = styled.View`
+  flex-direction: row;
+  justify-content: space-between;
+  padding-top: ${RFValue(theme.spacing.n12)}px;
 `;
