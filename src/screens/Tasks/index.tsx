@@ -11,7 +11,6 @@ import { TouchableOpacity, View } from "react-native";
 import { MaterialIcons, Feather } from "@expo/vector-icons";
 import { SwipeListView } from "react-native-swipe-list-view";
 import { RFValue } from "react-native-responsive-fontsize";
-import reactotron from "reactotron-react-native";
 import Animated from "react-native-reanimated";
 
 interface IScrollItems {
@@ -37,6 +36,26 @@ const DATA = [
   },
   {
     id: "58694a0f-3da1-471f-bd96-145571e29d72",
+    title: "Third Item",
+  },
+  {
+    id: "7777",
+    title: "Third Item",
+  },
+  {
+    id: "7777",
+    title: "Third Item",
+  },
+  {
+    id: "7777",
+    title: "Third Item",
+  },
+  {
+    id: "7777",
+    title: "Third Item",
+  },
+  {
+    id: "7777",
     title: "Third Item",
   },
   {
@@ -71,8 +90,8 @@ initialList.forEach((_, i) => {
 });
 
 type Item = typeof initialList[0];
-const renderItem2 = ({ item }: { item: Item }) => (
-  <S.Container>
+const renderItem2 = () => (
+  <S.ContainerTasks>
     <Card>
       <S.ContentCardTasks>
         <S.ContentLeft>
@@ -100,7 +119,7 @@ const renderItem2 = ({ item }: { item: Item }) => (
         </S.ContentRight>
       </S.ContentCardTasks>
     </Card>
-  </S.Container>
+  </S.ContainerTasks>
 );
 
 const Tasks = () => {
@@ -257,33 +276,6 @@ const Tasks = () => {
         </View>
 
         <S.Container>
-          <Card>
-            <S.ContentCardTasks>
-              <S.ContentLeft>
-                <Text
-                  type="h4"
-                  color={theme.colors.primaryBold}
-                  style={{ marginBottom: 24 }}
-                >
-                  Testar aplicativo
-                </Text>
-                <S.ContentCalendar>
-                  <Feather
-                    name="calendar"
-                    size={18}
-                    color={theme.colors.primaryMedium}
-                    style={{ paddingRight: 8, paddingBottom: 4 }}
-                  />
-                  <Text type="p12" color={theme.colors.primaryMedium}>
-                    20/11/200
-                  </Text>
-                </S.ContentCalendar>
-              </S.ContentLeft>
-              <S.ContentRight>
-                <S.StatusCircle></S.StatusCircle>
-              </S.ContentRight>
-            </S.ContentCardTasks>
-          </Card>
           <S.ContainerButtonCreateTask>
             <PrimaryButton
               onPress={() => {}}
@@ -305,7 +297,9 @@ const Tasks = () => {
 export default Tasks;
 
 const styles = StyleSheet.create({
-  container: {},
+  container: {
+    // height: "100%",
+  },
   backTextWhite: {
     color: "#FFF",
   },
@@ -317,7 +311,7 @@ const styles = StyleSheet.create({
   },
   rowBack: {
     alignItems: "center",
-    flex: 3,
+    flex: 1,
     flexDirection: "row",
     justifyContent: "space-between",
     paddingLeft: 15,
@@ -352,15 +346,5 @@ const styles = StyleSheet.create({
     marginVertical: 8,
     marginHorizontal: 16,
     flexDirection: "row",
-  },
-  image: {
-    flex: 1,
-    alignContent: "flex-start",
-    height: 40,
-    width: 50,
-  },
-  text: {
-    flex: 4,
-    paddingLeft: 10,
   },
 });

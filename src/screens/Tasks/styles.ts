@@ -12,15 +12,25 @@ export const ContentHeader = styled.View`
 
 export const Container = styled.View`
   flex-direction: column;
-  flex: 1;
+
+  padding: 0;
+`;
+
+export const ContainerTasks = styled.View`
+  flex-direction: column;
+
   padding: 0 ${RFValue(theme.spacing.n16)}px ${RFValue(theme.spacing.n12)}px
     ${RFValue(theme.spacing.n16)}px;
 `;
 
 export const ContainerButtonCreateTask = styled.View`
-  flex: 1;
-  justify-content: flex-end;
+  position: absolute;
+  justify-content: center;
   align-items: center;
+  width: 100%;
+  bottom: ${RFValue(50)}px;
+
+  left: 0;
 `;
 export const ContentButton = styled.View`
   flex-direction: row;
