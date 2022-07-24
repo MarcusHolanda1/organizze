@@ -15,6 +15,7 @@ export const theme: Theme = {
     backgroundLogin: "#AF9AFD",
     black: "#000",
     ice: "#F2EBFF",
+    basic: "#DED6FF",
   },
   fonts: {
     regular: {

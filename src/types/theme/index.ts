@@ -13,6 +13,7 @@ export type Theme = {
     backgroundLogin: string;
     black: string;
     ice: string;
+    basic: string;
   };
   fonts: {
     regular: {
