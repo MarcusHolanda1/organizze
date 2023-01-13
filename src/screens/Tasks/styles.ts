@@ -28,7 +28,7 @@ export const ContainerButtonCreateTask = styled.View`
   justify-content: center;
   align-items: center;
   width: 100%;
-  bottom: ${Platform.OS === "android" ? RFValue(80) : RFValue(50)}px;
+  bottom: ${Platform.OS === "android" ? RFValue(60) : RFValue(30)}px;
   left: 0;
 `;
 export const ContentButton = styled.View`

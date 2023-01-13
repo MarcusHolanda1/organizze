@@ -10,16 +10,20 @@ import {
 } from "react-native";
 
 import * as S from "./styles";
-import { Text, Page, PrimaryButton, Card } from "../../design";
+import { Text, Page, PrimaryButton, Card } from "../../UI";
 import { theme } from "../../theme";
-import { BottomSheetRefProps } from "../../design/components/BottomSheet";
 import BottomSheetTask from "./bottomSheet";
+import { dbFirestore } from "../../App";
 
+import { gestureHandlerRootHOC } from "react-native-gesture-handler";
 import { TouchableOpacity, View } from "react-native";
 import { MaterialIcons, Feather } from "@expo/vector-icons";
+import { getDoc, doc, collection, query, getDocs } from "firebase/firestore";
 import { SwipeListView } from "react-native-swipe-list-view";
 import { RFValue } from "react-native-responsive-fontsize";
 import Animated from "react-native-reanimated";
+import { useEffect } from "react";
+import reactotron from "reactotron-react-native";
 interface IScrollItems {
   id: string;
   title: string;
@@ -133,7 +137,21 @@ const Tasks = () => {
   const [selectedId, setSelectedId] = useState(null);
   const [listData, setListData] = useState(initialList);
 
-  const refBottomSheet = useRef<BottomSheetRefProps>(null);
+  const navigation = useNavigation();
+  const refBottomSheet = useRef<any>(null);
+
+  const handleGetDataFirestore = async () => {
+    try {
+      const ref = query(collection(dbFirestore, "tasks"));
+      // const ref = doc(dbFirestore, "tasks", "VnPOKzkvdvEGwSg7DseL");
+      const querySnapthot = await getDocs(ref);
+
+      const groups = querySnapthot.docs.map((doc) => {
+        return { ...doc.data(), id: doc.id };
+      });
+      console.log(groups);
+    } catch (error) {}
+  };
 
   const handleTriggerBottomSheet = () => {
     const isActive = refBottomSheet?.current?.isActive?.();
@@ -144,8 +162,6 @@ const Tasks = () => {
       refBottomSheet?.current?.scrollTo?.(-750);
     }
   };
-
-  const navigation = useNavigation();
 
   const closeRow = (rowMap: any, rowKey: string) => {
     console.log("this is the rowMap: ", rowMap);
@@ -175,6 +191,10 @@ const Tasks = () => {
   }) => {
     rowSwipeAnimatedValues[key].setValue(Math.abs(value));
   };
+
+  useEffect(() => {
+    handleGetDataFirestore();
+  }, []);
 
   const renderHiddenItem = ({ item }: { item: Item }, rowMap: any) => (
     <View style={styles.rowBack}>
@@ -300,27 +320,22 @@ const Tasks = () => {
               onPress={handleTriggerBottomSheet}
               backgroundColor={theme.colors.primaryMedium}
             >
-              <S.ContentButton>
-                <S.ContentMoreText>
-                  <Text type="h3">+</Text>
-                </S.ContentMoreText>
-                <Text type="h3">Nova tarefa</Text>
-              </S.ContentButton>
+              <Text type="h3">+ Nova tarefa</Text>
             </PrimaryButton>
           </S.ContainerButtonCreateTask>
         </S.Container>
       </Page>
-      <BottomSheetTask
-        handleCreateTask={() => {}}
-        refBottomSheet={refBottomSheet}
-      />
+      <BottomSheetTask refBottomSheet={refBottomSheet} />
     </>
   );
 };
-export default Tasks;
+export default gestureHandlerRootHOC(Tasks);
 
 const styles = StyleSheet.create({
-  container: {},
+  container: {
+    flex: 1,
+    marginBottom: RFValue(20),
+  },
   backTextWhite: {
     color: "#FFF",
   },

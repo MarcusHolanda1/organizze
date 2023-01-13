@@ -17,8 +17,9 @@ import { theme } from "../../../theme";
 const { height: SCREEN_HEIGHT } = Dimensions.get("window");
 
 export type BottomSheetRefProps = {
-  scrollTo?: (destination: number) => void;
+  close?: () => void;
   isActive?: () => boolean;
+  scrollTo?: (destination: number) => void;
 };
 
 type BottomSheetProps = {
@@ -71,9 +72,16 @@ const BottomSheet = forwardRef<BottomSheetRefProps, BottomSheetProps>(
       return active.value;
     }, []);
 
-    useImperativeHandle(ref, () => ({ scrollTo, isActive }), [
+    const close = useCallback(() => {
+      active.value = false;
+      translationY.value = withSpring(0, { damping: 90 });
+      translationBackdrop.value = withSpring(0, { damping: 60 });
+    }, []);
+
+    useImperativeHandle(ref, () => ({ scrollTo, isActive, close }), [
       scrollTo,
       isActive,
+      close,
     ]);
 
     return (

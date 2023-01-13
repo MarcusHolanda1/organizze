@@ -1,4 +1,5 @@
 package com.organizze;
+package com.swmansion.gesturehandler.react.example;
 
 import android.os.Bundle;
 

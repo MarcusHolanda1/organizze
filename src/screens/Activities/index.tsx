@@ -4,7 +4,7 @@ import { MaterialIcons } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
 
 import * as S from "./styles";
-import { Page, PrimaryButton, Text, Card } from "../../design";
+import { Page, PrimaryButton, Text, Card } from "../../UI";
 import { theme } from "../../theme";
 import { useStorage } from "../../redux/hooks";
 import { RootStackParamList } from "../../navigation";

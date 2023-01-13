@@ -6,3 +6,4 @@ export { default as BottomSheet } from "./BottomSheet";
 export { default as ContainerInput } from "./ContainerInput";
 export { default as IconButton } from "./Buttons/IconButton";
 export { default as DynamicSvg } from "./DynamicSvg";
+export { default as Select } from "./Select";

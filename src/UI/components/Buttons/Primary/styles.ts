@@ -5,10 +5,15 @@ import { theme } from "../../../../theme";
 
 interface Props {
   backgroundColor: string;
+  disabled?: boolean;
 }
 
 export const Button = styled.TouchableOpacity`
-  background-color: ${({ backgroundColor }: Props) => backgroundColor};
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  background-color: ${(props: Props) =>
+    props.disabled ? theme.colors.basic : props.backgroundColor};
   border-radius: 20px;
   padding: ${RFValue(theme.spacing.n16)}px;
 `;

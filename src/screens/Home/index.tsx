@@ -5,7 +5,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import { Alert } from "react-native";
 
 import * as S from "./styles";
-import { Page, Text, Card } from "../../design";
+import { Page, Text, Card } from "../../UI";
 import { theme } from "../../theme";
 import { useStorage, useDispatchStorage } from "../../redux/hooks";
 import { setDataUser } from "../../redux/slices/auth";
@@ -13,7 +13,7 @@ import request from "../../services /request";
 import { WeatherData } from "../../types/responses";
 import { getDateNow } from "../../utils";
 import { weatherConditionsMock } from "../../mocks/weatherConditions";
-import DynamicSvg from "../../design/components/DynamicSvg";
+import DynamicSvg from "../../UI/components/DynamicSvg";
 
 interface ILocationProps {
   coords: {

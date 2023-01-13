@@ -14,6 +14,9 @@ export type Theme = {
     black: string;
     ice: string;
     basic: string;
+    errorLight: string;
+    successLight: string;
+    warningLight: string;
   };
   fonts: {
     regular: {

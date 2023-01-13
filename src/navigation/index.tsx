@@ -12,15 +12,14 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
 import { useStorage, useDispatchStorage } from "../redux/hooks";
-import { StartSlidePage } from "../design";
+import { StartSlidePage } from "../UI";
 import IMAGES from "../assets";
-import BottomTabNavigate from "../design/structures/BottomTabNavigate";
+import BottomTabNavigate from "../UI/structures/BottomTabNavigate";
 import SignIn from "../screens/SignIn";
 import Tasks from "../screens/Tasks";
 import SLIDES from "../mocks/slide";
 import { theme } from "../theme";
 import { setShowHome } from "../redux/slices/auth";
-import { Swipe } from "../screens/Tasks/teste";
 
 const Stack = createNativeStackNavigator();
 
@@ -28,7 +27,6 @@ export type RootStackParamList = {
   SignIn: undefined;
   BottomTabNavigate: undefined;
   Tasks: undefined;
-  Swipe: undefined;
 };
 
 function MainApp() {
@@ -77,7 +75,6 @@ function MainApp() {
               component={BottomTabNavigate}
             />
             <Stack.Screen name="Tasks" component={Tasks} />
-            <Stack.Screen name="Swipe" component={Swipe} />
           </>
         ) : (
           <Stack.Screen name="SignIn" component={SignIn} />

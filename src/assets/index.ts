@@ -1,26 +1,28 @@
+import { ImageProps } from "react-native";
+
 type ImagesTypes = {
   startImages: {
-    startDiary: string;
-    startFood: string;
-    startLogin: string;
-    startTasks: string;
+    startDiary: ImageProps;
+    startFood: ImageProps;
+    startLogin: ImageProps;
+    startTasks: ImageProps;
   };
   weatherImages: {
-    weatherCloud: string;
-    weatherRain: string;
-    weatherSnow: string;
-    weatherSunAndCloud: string;
-    weatherSunny: string;
+    weatherCloud: ImageProps;
+    weatherRain: ImageProps;
+    weatherSnow: ImageProps;
+    weatherSunAndCloud: ImageProps;
+    weatherSunny: ImageProps;
   };
   bubbles: {
-    bubbleRight: string;
-    bubbleLeft: string;
-    arrowNext: string;
-    doneNext: string;
+    bubbleRight: ImageProps;
+    bubbleLeft: ImageProps;
+    arrowNext: ImageProps;
+    doneNext: ImageProps;
   };
   login: {
-    google: string;
-    socialLogin: string;
+    google: ImageProps;
+    socialLogin: ImageProps;
   };
 };
 

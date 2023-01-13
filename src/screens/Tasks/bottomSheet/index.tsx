@@ -1,30 +1,132 @@
-import React, { useRef, useState } from "react";
+import React, { useState } from "react";
 
 import { AntDesign } from "@expo/vector-icons";
-import { MaterialIcons, Feather } from "@expo/vector-icons";
-import { TextInput, TouchableOpacity, View } from "react-native";
+import { Feather } from "@expo/vector-icons";
+import {
+  Alert,
+  TextInput,
+  View,
+  ActivityIndicator,
+  Platform,
+} from "react-native";
+import DateTimePickerModal from "react-native-modal-datetime-picker";
+import { addDoc, collection } from "firebase/firestore";
 
 import * as S from "./styles";
-import { BottomSheetRefProps } from "../../../design/components/BottomSheet";
+import { dbFirestore } from "../../../App";
 import {
   Text,
   BottomSheet,
   ContainerInput,
   IconButton,
   PrimaryButton,
-} from "../../../design";
+  Select,
+} from "../../../UI";
 import { theme } from "../../../theme";
+import { convertDateIsoValidDate, renderCurrentDate } from "../../../utils";
 
 interface IBottomSheetProps {
-  refBottomSheet: React.RefObject<Object>;
-  handleCreateTask: () => void;
+  refBottomSheet: {
+    current: {
+      close?: () => void;
+      isActive?: () => boolean;
+      scrollTo?: (destination: number) => void;
+    };
+  };
 }
 
-const BottomSheetTask = ({
-  refBottomSheet,
-  handleCreateTask,
-}: IBottomSheetProps) => {
-  const [value, onChangeText] = useState("Título da tarefa ");
+interface ISelectPriorityData {
+  id: number;
+  priority: string;
+  emoji: string;
+}
+
+const priorityData: ISelectPriorityData[] = [
+  { id: 1, priority: "Alta", emoji: "🔥" },
+  { id: 2, priority: "Média", emoji: "🤏" },
+  { id: 3, priority: "Baixa", emoji: "❄️" },
+];
+
+const BottomSheetTask = ({ refBottomSheet }: IBottomSheetProps) => {
+  const [titleTask, setTitleTask] = useState<string>("Título da tarefa");
+  const [datePickerIsVisible, setDatePickerIsVisible] =
+    useState<boolean>(false);
+  const [dateTask, setDateTask] = useState<string>(renderCurrentDate());
+  const [selectPriorityData, setSelectPriorityData] =
+    useState<ISelectPriorityData>(priorityData[0]);
+  const [loading, setLoading] = useState<boolean>(false);
+
+  const handleShowDatePicker = () => {
+    setDatePickerIsVisible(true);
+  };
+
+  const hideDatePicker = () => {
+    setDatePickerIsVisible(false);
+  };
+
+  const renderDateFormatted = (date: Date) => {
+    const languageUS = "pt-BR";
+
+    if (Platform.OS === "android") {
+      console.log("android", date);
+      setDateTask(
+        date.toISOString().replace(/T.*/, "").split("-").reverse().join("/")
+      );
+    } else {
+      let selectedDate = convertDateIsoValidDate(date, languageUS);
+
+      setDateTask(selectedDate);
+    }
+  };
+
+  const handleConfirm = (date: Date) => {
+    renderDateFormatted(date);
+
+    hideDatePicker();
+  };
+
+  const handleOnSelectPriority = (item: any) => {
+    setSelectPriorityData(item);
+  };
+
+  const handleCreateTask = async () => {
+    try {
+      setLoading(true);
+
+      const columnRef = collection(dbFirestore, "tasks");
+
+      const closeBottomSheet = () => {
+        refBottomSheet.current?.close?.();
+      };
+
+      await addDoc(columnRef, {
+        title: titleTask,
+        date: dateTask,
+        priority: selectPriorityData.priority,
+      });
+
+      Alert.alert("Tarefa criada com sucesso", "", [
+        {
+          text: "OK",
+          onPress: () => {
+            closeBottomSheet(), resetAllState();
+          },
+        },
+      ]);
+
+      setLoading(false);
+    } catch (error: any) {
+      Alert.alert("Erro ao criar tarefa");
+      setLoading(false);
+      return error.response;
+    }
+  };
+
+  const resetAllState = () => {
+    setTitleTask("Título da tarefa");
+    setDateTask(renderCurrentDate());
+    setSelectPriorityData(priorityData[0]);
+  };
 
   return (
     <BottomSheet ref={refBottomSheet}>
@@ -41,8 +143,10 @@ const BottomSheetTask = ({
             <TextInput
               multiline
               numberOfLines={2}
-              onChangeText={(text: string) => onChangeText(text)}
-              value={value}
+              onChangeText={(text: string) => {
+                setTitleTask(text), console.log(text);
+              }}
+              value={titleTask}
               style={{
                 color: theme.colors.background,
                 padding: 10,
@@ -58,7 +162,10 @@ const BottomSheetTask = ({
           <View style={{ width: "48%" }}>
             <ContainerInput>
               <S.ContentValidateTask>
-                <IconButton backgroundColor={theme.colors.basic}>
+                <IconButton
+                  onPress={handleShowDatePicker}
+                  backgroundColor={theme.colors.basic}
+                >
                   <Feather
                     name="calendar"
                     size={18}
@@ -78,78 +185,50 @@ const BottomSheetTask = ({
                     color={theme.colors.primaryMedium}
                     style={{ fontSize: 12 }}
                   >
-                    30 de novembro
+                    {dateTask}
                   </Text>
                 </View>
               </S.ContentValidateTask>
             </ContainerInput>
           </View>
           <View style={{ width: "48%" }}>
-            <ContainerInput>
-              <S.ContentValidateTask>
-                <IconButton backgroundColor={theme.colors.basic}>
-                  <Text type="h4">🤏</Text>
-                </IconButton>
-
-                <View
-                  style={{
-                    height: 50,
-                    width: 110,
-                    justifyContent: "space-between",
-                    flexDirection: "row",
-                    paddingLeft: theme.spacing.n6,
-                  }}
-                >
-                  <View
-                    style={{
-                      justifyContent: "space-between",
-                      flexDirection: "column",
-                    }}
-                  >
-                    <Text type="small">Prioridade</Text>
-                    <Text
-                      color={theme.colors.primaryMedium}
-                      style={{ fontSize: 12 }}
-                    >
-                      Média
-                    </Text>
-                  </View>
-                  <View
-                    style={{
-                      justifyContent: "center",
-                      flexDirection: "row",
-                      alignItems: "center",
-                    }}
-                  >
-                    <TouchableOpacity style={{}}>
-                      <MaterialIcons
-                        name="keyboard-arrow-down"
-                        size={28}
-                        color={theme.colors.primaryMedium}
-                      />
-                    </TouchableOpacity>
-                  </View>
-                </View>
-              </S.ContentValidateTask>
-            </ContainerInput>
+            <Select
+              data={priorityData}
+              value={selectPriorityData}
+              onSelect={handleOnSelectPriority}
+            />
           </View>
         </S.ContentValidateAndPriority>
 
-        <S.Container>
+        <S.ContainerSaveButton>
           <S.ContainerButtonCreateTask>
             <PrimaryButton
               onPress={handleCreateTask}
               backgroundColor={theme.colors.primaryMedium}
+              disabled={titleTask === "" ? true : false}
             >
-              <S.ContentButton>
-                <Text style={{ paddingHorizontal: 10 }} type="h3">
-                  Salvar
-                </Text>
-              </S.ContentButton>
+              {loading ? (
+                <View style={{ paddingHorizontal: 24, paddingVertical: 8 }}>
+                  <ActivityIndicator size="small" color="#fff" />
+                </View>
+              ) : (
+                <Text type="h3">Salvar</Text>
+              )}
             </PrimaryButton>
           </S.ContainerButtonCreateTask>
-        </S.Container>
+        </S.ContainerSaveButton>
       </S.ContainerBottomSheet>
+
+      <DateTimePickerModal
+        isVisible={datePickerIsVisible}
+        mode="date"
+        onConfirm={(date: Date) => {
+          handleConfirm(date), console.log(date);
+        }}
+        onCancel={hideDatePicker}
+        onChange={(date: any) => handleConfirm(date)}
+        timeZoneOffsetInMinutes={0}
+      />
     </BottomSheet>
   );
 };

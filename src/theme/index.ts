@@ -16,6 +16,9 @@ export const theme: Theme = {
     black: "#000",
     ice: "#F2EBFF",
     basic: "#DED6FF",
+    errorLight: "#FFE5D5",
+    successLight: "#D0FEF6",
+    warningLight: "#FFF6D9",
   },
   fonts: {
     regular: {

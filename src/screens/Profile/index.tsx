@@ -4,7 +4,7 @@ import * as S from "./styles";
 import { Image, Alert } from "react-native";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 
-import { Page, Text } from "../../design";
+import { Page, Text } from "../../UI";
 import { useStorage, useDispatchStorage } from "../../redux/hooks";
 import { theme } from "../../theme";
 import { setDataUser, setAuthenticated } from "../../redux/slices/auth";

@@ -5,12 +5,12 @@ import { setAuthenticated } from "../../redux/slices/auth";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
 import { ParamsGoogleTokenUser } from "../../types/responses";
-import { StartSlidePage, Text } from "../../design";
+import { StartSlidePage, Text } from "../../UI";
 import * as S from "./styles";
 import IMAGES from "../../assets";
 import { RESPONSE_TYPE, SCOPE } from "../../config/Google.js";
 import { useDispatchStorage } from "../../redux/hooks";
-import { PrimaryButton } from "../../design/components";
+import { PrimaryButton } from "../../UI/components";
 import { theme } from "../../theme";
 
 interface IAuthSession {

@@ -37,7 +37,7 @@ export const ContentButton = styled.View`
   flex-direction: row;
 `;
 
-export const Container = styled.View`
+export const ContainerSaveButton = styled.View`
   flex-direction: column;
 
   padding: 0;

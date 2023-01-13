@@ -6,8 +6,9 @@
     "slug": "organizze",
     "scheme": "organizze",
     "version": "1.0.0",
+    "userInterfaceStyle": "automatic",
     "assetBundlePatterns": ["**/*"],
-    "packagaerOpts": {
+    "packagerOpts": {
       "config": "metro.config.js",
       "sourceExts": ["js", "jsx", "ts", "tsx", "svg"]
     }
