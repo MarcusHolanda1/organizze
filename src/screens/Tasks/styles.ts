@@ -44,11 +44,6 @@ export const Header = styled.View`
   padding: ${RFValue(theme.spacing.n8)}px;
 `;
 
-export const ContentFlatlist = styled.View`
-  padding-left: ${RFValue(theme.spacing.n8)}px;
-  padding-bottom: ${RFValue(theme.spacing.n8)}px;
-`;
-
 export const ContentCardTasks = styled.View`
   padding: ${RFValue(theme.spacing.n8)}px;
 
