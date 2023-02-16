@@ -23,19 +23,6 @@ const Tasks = () => {
   const navigation = useNavigation();
   const refBottomSheet = useRef<any>(null);
 
-  const handleGetDataFirestore = async () => {
-    try {
-      const ref = query(collection(dbFirestore, "tasks"));
-
-      const querySnapthot = await getDocs(ref);
-
-      const groups = querySnapthot.docs.map((doc) => {
-        return { ...doc.data(), id: doc.id };
-      });
-      console.log(groups);
-    } catch (error) {}
-  };
-
   const handleTriggerBottomSheet = () => {
     const isActive = refBottomSheet?.current?.isActive?.();
 
@@ -45,9 +32,6 @@ const Tasks = () => {
       refBottomSheet?.current?.scrollTo?.(-750);
     }
   };
-  useEffect(() => {
-    handleGetDataFirestore();
-  }, []);
 
   return (
     <>
