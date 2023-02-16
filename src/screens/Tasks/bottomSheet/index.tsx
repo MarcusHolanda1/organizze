@@ -68,7 +68,6 @@ const BottomSheetTask = ({ refBottomSheet }: IBottomSheetProps) => {
     const languageUS = "pt-BR";
 
     if (Platform.OS === "android") {
-      console.log("android", date);
       setDateTask(
         date.toISOString().replace(/T.*/, "").split("-").reverse().join("/")
       );
