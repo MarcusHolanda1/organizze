@@ -143,7 +143,7 @@ const BottomSheetTask = ({ refBottomSheet }: IBottomSheetProps) => {
               multiline
               numberOfLines={2}
               onChangeText={(text: string) => {
-                setTitleTask(text), console.log(text);
+                setTitleTask(text);
               }}
               value={titleTask}
               style={{
@@ -222,7 +222,7 @@ const BottomSheetTask = ({ refBottomSheet }: IBottomSheetProps) => {
         isVisible={datePickerIsVisible}
         mode="date"
         onConfirm={(date: Date) => {
-          handleConfirm(date), console.log(date);
+          handleConfirm(date);
         }}
         onCancel={hideDatePicker}
         onChange={(date: any) => handleConfirm(date)}
