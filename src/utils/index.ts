@@ -27,11 +27,13 @@ export const getDescribeCurrentMonth = (date: string) => {
 };
 
 export const renderCurrentDate = () => {
-  let date = new Date().getDate();
-  let month = new Date().getMonth() + 1;
-  let year = new Date().getFullYear();
+  const currentDate = new Date().toLocaleString("pt-BR", {
+    day: "numeric",
+    month: "2-digit",
+    year: "numeric",
+  });
 
-  return date + "/" + month + "/" + year;
+  return currentDate;
 };
 
 export const renderColorPriority = (priority: string) => {
