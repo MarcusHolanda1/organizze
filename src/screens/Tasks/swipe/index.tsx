@@ -1,18 +1,24 @@
 import React, { useEffect, useState } from "react";
-import { StyleSheet, TouchableOpacity, View, Platform } from "react-native";
+import {
+  StyleSheet,
+  TouchableOpacity,
+  View,
+  Platform,
+  Alert,
+} from "react-native";
 
 import * as S from "./styles";
 import { RowMap, SwipeListView } from "react-native-swipe-list-view";
 import { Feather } from "@expo/vector-icons";
 
-import { collection, query, getDocs } from "firebase/firestore";
+import { collection, query, getDocs, deleteDoc, doc } from "firebase/firestore";
 import { dbFirestore } from "../../../App";
 import { Card, Text } from "../../../UI";
 import { theme } from "../../../theme";
 import { RFValue } from "react-native-responsive-fontsize";
 import { Task, TaskItem } from "./interface";
 
-export default function Swipe() {
+export default function Swipe({}) {
   const [listData, setListData] = useState<Task[]>([]);
 
   const handleGetDataFirestore = async () => {
@@ -37,16 +43,47 @@ export default function Swipe() {
     closeRow && closeRow();
   };
 
-  const deleteRow = (
+  const deleteTaskFromFirebase = async (selectedTask: { id: string }) => {
+    try {
+      const taskRef = doc(dbFirestore, "tasks", selectedTask.id);
+
+      await deleteDoc(taskRef);
+    } catch (error) {
+      return error;
+    }
+  };
+
+  const deleteRow = async (
     rowObjects: { [key: string]: { closeRow: () => void } },
     selectedRowId: string
   ) => {
+    await deleteTaskFromFirebase({ id: selectedRowId });
+
     closeRow(rowObjects, selectedRowId);
 
     const newData = [...listData];
     const prevIndex = listData.findIndex((item) => item.id === selectedRowId);
     newData.splice(prevIndex, 1);
     setListData(newData);
+  };
+
+  const handleDeleteTask = (
+    rowObjects: { [key: string]: { closeRow: () => void } },
+    selectedRowId: string
+  ) => {
+    Alert.alert(
+      "Excluir tarefa",
+      "Tem certeza que deseja excluir essa tarefa?",
+      [
+        {
+          text: "Cancelar",
+          onPress: () => {},
+          style: "cancel",
+        },
+        { text: "OK", onPress: () => deleteRow(rowObjects, selectedRowId) },
+      ],
+      { cancelable: false }
+    );
   };
 
   useEffect(() => {
@@ -91,7 +128,7 @@ export default function Swipe() {
       <TouchableOpacity
         style={[styles.backRightBtn, styles.backRightBtnLeft]}
         onPress={() => {
-          closeRow(rowMap, data.item.id);
+          handleDeleteTask(rowMap, data.item.id);
         }}
       >
         <Feather
@@ -103,7 +140,7 @@ export default function Swipe() {
       </TouchableOpacity>
       <TouchableOpacity
         style={[styles.backRightBtn, styles.backRightBtnRight]}
-        onPress={() => deleteRow(rowMap, data.item.id)}
+        onPress={() => handleDeleteTask(rowMap, data.item.id)}
       >
         <Feather
           name="check-square"
