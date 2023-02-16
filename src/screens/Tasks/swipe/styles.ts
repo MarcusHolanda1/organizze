@@ -56,11 +56,11 @@ export const ContentCalendar = styled.View`
   flex-direction: row;
 `;
 
-export const StatusCircle = styled.View`
+export const StatusCircle = styled.View<{ color?: string }>`
   width: ${RFValue(12)}px;
   height: ${RFValue(12)}px;
   border-radius: ${44 / 2}px;
-  background: red;
+  background: ${(props) => props.color || "red"};
 `;
 
 export const ContentLeft = styled.View``;

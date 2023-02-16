@@ -4,6 +4,7 @@ export interface Task {
   priority?: string;
   title?: string;
   description?: string;
+  status?: string;
 }
 
 export interface TaskItem {

@@ -102,6 +102,7 @@ const BottomSheetTask = ({ refBottomSheet }: IBottomSheetProps) => {
         title: titleTask,
         date: dateTask,
         priority: selectPriorityData.priority,
+        status: "inProgress",
       });
 
       Alert.alert("Tarefa criada com sucesso", "", [

@@ -44,3 +44,12 @@ export const renderColorPriority = (priority: string) => {
   }[priority];
   return render;
 };
+
+export const renderColorTaskStatus = (status: string) => {
+  const render = {
+    completed: theme.colors.successLight,
+    inProgress: theme.colors.pending,
+    notCompleted: theme.colors.error,
+  }[status];
+  return render;
+};

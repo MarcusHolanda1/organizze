@@ -3,6 +3,7 @@ export type Theme = {
     error: string;
     background: string;
     primary: string;
+    pending: string;
     primaryLight: string;
     primaryMedium: string;
     primaryBold: string;

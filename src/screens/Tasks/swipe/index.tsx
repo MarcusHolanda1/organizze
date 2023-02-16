@@ -17,6 +17,7 @@ import { Card, Text } from "../../../UI";
 import { theme } from "../../../theme";
 import { RFValue } from "react-native-responsive-fontsize";
 import { Task, TaskItem } from "./interface";
+import { renderColorTaskStatus } from "../../../utils";
 
 export default function Swipe({}) {
   const [listData, setListData] = useState<Task[]>([]);
@@ -114,9 +115,15 @@ export default function Swipe({}) {
               </Text>
             </S.ContentCalendar>
           </S.ContentLeft>
-          <S.ContentRight>
-            <S.StatusCircle></S.StatusCircle>
-          </S.ContentRight>
+          {data.item.status ? (
+            <S.ContentRight>
+              <S.StatusCircle
+                color={renderColorTaskStatus(data.item.status)}
+              ></S.StatusCircle>
+            </S.ContentRight>
+          ) : (
+            <></>
+          )}
         </S.ContentCardTasks>
       </Card>
     </S.ContainerTasks>
@@ -140,7 +147,7 @@ export default function Swipe({}) {
       </TouchableOpacity>
       <TouchableOpacity
         style={[styles.backRightBtn, styles.backRightBtnRight]}
-        onPress={() => handleDeleteTask(rowMap, data.item.id)}
+        onPress={() => {}}
       >
         <Feather
           name="check-square"

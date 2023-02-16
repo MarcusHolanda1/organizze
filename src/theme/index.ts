@@ -5,6 +5,7 @@ export const theme: Theme = {
     error: "#FF6363",
     background: "#FFF",
     primary: "#8263FF",
+    pending: "#FFB444",
     primaryLight: "#CEC1FF",
     primaryMedium: "#633DFF",
     primaryBold: "#3B0069",
