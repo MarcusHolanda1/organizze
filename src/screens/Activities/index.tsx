@@ -68,19 +68,6 @@ const Activities = () => {
           </S.ContentButtonEnterActivity>
         </S.Container>
       </Card>
-      {/* <S.ContainerButtonCreateTask>
-        <PrimaryButton
-          onPress={() => {}}
-          backgroundColor={theme.colors.primaryMedium}
-        >
-          <S.ContentButton>
-            <S.ContentMoreText>
-              <Text type="h3">+</Text>
-            </S.ContentMoreText>
-            <Text type="h3">Nova tarefa</Text>
-          </S.ContentButton>
-        </PrimaryButton>
-      </S.ContainerButtonCreateTask> */}
     </Page>
   );
 };
